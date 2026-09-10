@@ -2,6 +2,8 @@
 
 ### Full-Stack Food Ordering & Kitchen Management Platform
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Website-success?style=for-the-badge)](https://bitewisecloudkitchen.onrender.com/)
+
 CloudKitchen (BiteWise) is a full-stack food ordering platform built
 with the MERN stack. It combines a customer-facing storefront, an admin
 management dashboard, and a REST API backend into one application.
