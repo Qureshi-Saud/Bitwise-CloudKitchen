@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* The header is shorter on phones. Every sticky offset, the main-content
+       padding and the scroll anchor read this one variable, so the whole site
+       follows the header at every breakpoint. */
+    --header-h: 60px;
+  }
+
+  @media (min-width: 640px) {
+    :root { --header-h: 72px; }
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 16px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream text-charcoal font-sans;
+    text-rendering: optimizeLegibility;
+    /* Nothing is allowed to force a sideways scroll on a phone. `clip` rather
+       than `hidden` so position: sticky keeps working inside the page. */
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+    /* Long snack names and order numbers wrap instead of overflowing. */
+    overflow-wrap: break-word;
+  }
+
+  /* Media never breaks out of its column, whatever its intrinsic size is. */
+  img, svg, video, canvas {
+    max-width: 100%;
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
+  }
+
+  /* Slim, unobtrusive scrollbar that matches the brand. */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #f1f1ec; }
+  ::-webkit-scrollbar-thumb { background: #cfd6cc; border-radius: 99px; border: 2px solid #f1f1ec; }
+  ::-webkit-scrollbar-thumb:hover { background: #a7b3a3; }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-cream rounded-lg;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-semibold
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed
+           active:scale-[.97] select-none whitespace-nowrap;
+  }
+  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700 shadow-lift; }
+  .btn-accent { @apply btn bg-carrot-500 text-white hover:bg-carrot-600 shadow-lift; }
+  .btn-outline { @apply btn border-2 border-brand-600 text-brand-700 hover:bg-brand-50; }
+  .btn-ghost { @apply btn text-charcoal/70 hover:bg-black/5; }
+  .btn-sm { @apply px-3.5 py-2 text-sm sm:px-4; }
+  .btn-md { @apply px-4 py-2.5 text-sm sm:px-5 sm:text-base; }
+  .btn-lg { @apply px-5 py-3 text-sm sm:px-7 sm:py-3.5 sm:text-base; }
+
+  .card {
+    @apply bg-white rounded-3xl border border-black/5 shadow-card;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm
+           placeholder:text-charcoal/40 focus:border-brand-500 focus:ring-2 focus:ring-brand-100
+           outline-none transition disabled:bg-black/5;
+  }
+
+  .label { @apply block text-sm font-semibold text-charcoal/80 mb-1.5; }
+  .error-text { @apply mt-1.5 text-xs font-medium text-red-600; }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  /* The canonical chip tones. Anything labelling a page or a section uses
+     .chip-eyebrow; .chip-invert is its counterpart on a dark surface. */
+  .chip-eyebrow { @apply chip bg-brand-100 text-brand-800 ring-1 ring-brand-200; }
+  .chip-invert  { @apply chip bg-white/15 text-white; }
+  .chip-neutral { @apply chip bg-black/5 text-charcoal/70 ring-1 ring-black/5; }
+  /* A soft brand tag - the same tone Badge uses for "green", so a tag and a
+     badge sitting side by side read as one family. */
+  .chip-soft    { @apply chip bg-brand-50 text-brand-700 ring-1 ring-brand-200; }
+
+  /* Heading scale. There are exactly two levels of h2 on the site: section-level
+     headings that introduce a band, and card-level headings inside a .card. */
+  .h-page    { @apply text-[1.75rem] font-extrabold leading-tight xs:text-3xl sm:text-4xl; }
+  .h-section { @apply text-[1.75rem] font-extrabold leading-tight xs:text-3xl sm:text-4xl; }
+  /* Inner pages that sit inside a shell of their own, e.g. every account tab. */
+  .h-sub     { @apply text-xl font-extrabold xs:text-2xl; }
+  .h-card    { @apply flex items-center gap-2 text-base font-bold sm:text-lg; }
+
+  /* The standard supporting paragraph under a page or section heading. */
+  .lede { @apply mt-3 max-w-2xl text-sm leading-relaxed text-charcoal/65 sm:text-base; }
+
+  .section { @apply py-10 sm:py-14 lg:py-20; }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-black/[.06] rounded-xl;
+  }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full animate-shimmer;
+    background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+@layer utilities {
+  /* Full-height surfaces that must survive the collapsing browser chrome on
+     mobile. The vh line is the fallback for browsers without dvh. */
+  .min-h-dvh { min-height: 100vh; min-height: 100dvh; }
+  .max-h-dvh-92 { max-height: 92vh; max-height: 92dvh; }
+  .max-h-dvh-85 { max-height: 85vh; max-height: 85dvh; }
+  .min-h-below-header {
+    min-height: calc(100vh - var(--header-h));
+    min-height: calc(100dvh - var(--header-h));
+  }
+
+  /* index.html opts into viewport-fit=cover, so anything pinned to an edge has
+     to keep clear of the notch and the home indicator itself. */
+  .pb-safe-4 { padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+  .bottom-safe-5 { bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)); }
+  .bottom-safe-24 { bottom: calc(6rem + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* Touch devices get comfortable hit targets even where the visual size is
+   small. Sits outside @layer so it wins over the size utilities above. */
+@media (pointer: coarse) {
+  .btn, button, [role='button'], a.btn {
+    touch-action: manipulation;
+  }
+  .btn-sm { min-height: 40px; }
+  .btn-md, .btn-lg { min-height: 44px; }
+}
+
+/* iOS Safari zooms the whole page in when a focused control renders below 16px.
+   Kept out of the layers, and specific enough to beat a `text-sm` utility. */
+@media (max-width: 639.98px) {
+  input:not([type='checkbox']):not([type='radio']),
+  select:not([size]),
+  textarea {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

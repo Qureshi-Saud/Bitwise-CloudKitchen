@@ -1,0 +1,58 @@
+'use strict';
+
+module.exports = [
+  {
+    name: 'Salad Bowls',
+    tagline: 'Crunchy, colourful, filling',
+    description: 'Fresh-chopped bowls built on sprouts, quinoa and seasonal vegetables, finished with light dressings.',
+    icon: 'Salad',
+    accent: '#16a34a',
+    order: 1,
+    image: { url: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80' },
+  },
+  {
+    name: 'Wraps',
+    tagline: 'One-hand meals, zero mess',
+    description: 'Whole wheat and multigrain rotis rolled around grilled paneer, chicken or hummus with crisp veggies.',
+    icon: 'Wheat',
+    accent: '#ea580c',
+    order: 2,
+    image: { url: 'https://images.unsplash.com/photo-1600335895229-6e75511892c8?auto=format&fit=crop&w=1200&q=80' },
+  },
+  {
+    name: 'Sandwiches',
+    tagline: 'Grilled, not greasy',
+    description: 'Multigrain bread, generous fillings and minimal butter - toasted fresh the moment you order.',
+    icon: 'Sandwich',
+    accent: '#ca8a04',
+    order: 3,
+    image: { url: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1200&q=80' },
+  },
+  {
+    name: 'Cutlets',
+    tagline: 'Pan-seared, never deep fried',
+    description: 'Oats, vegetable and chicken cutlets shallow-cooked with very little oil and served with fresh chutney.',
+    icon: 'CookingPot',
+    accent: '#b45309',
+    order: 4,
+    image: { url: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=80' },
+  },
+  {
+    name: 'Smoothies',
+    tagline: 'Blended fresh, never from concentrate',
+    description: 'Real fruit blended with curd, milk or plant milk - no syrups, no artificial colours.',
+    icon: 'CupSoda',
+    accent: '#db2777',
+    order: 5,
+    image: { url: 'https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=1200&q=80' },
+  },
+  {
+    name: 'Oats Jars',
+    tagline: 'Grab-and-go wholesome jars',
+    description: 'Overnight oats layered with fruit, nuts, seeds and yogurt in a sealed, spill-proof jar.',
+    icon: 'Wheat',
+    accent: '#7c3aed',
+    order: 6,
+    image: { url: 'https://images.unsplash.com/photo-1517093157656-b9eccef91cb1?auto=format&fit=crop&w=1200&q=80' },
+  },
+];
